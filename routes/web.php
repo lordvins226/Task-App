@@ -19,4 +19,5 @@ Route::get('/', function () {
 
 Route::get('/tasksList',[TaskController::class,'index']);
 
-// Route::get('/{vue?}', 'AppController@spa')->where('vue', '[\/\w\.-]*');
+Route::post('/tasksList',[TaskController::class,'store']);
+

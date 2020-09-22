@@ -5009,7 +5009,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      name: ''
+    };
+  },
+  methods: {
+    taskStore: function taskStore() {
+      var _this = this;
+
+      axios.post('http://localhost:8000/tasksList', {
+        name: this.name
+      }).then(function (reponse) {
+        return _this.$emit('task-added', reponse);
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -5080,6 +5107,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("http://localhost:8000/tasksList?page=" + page).then(function (response) {
         _this2.tasks = response.data;
       });
+    },
+    refresh: function refresh(tasks) {
+      this.tasks = tasks.data;
     }
   },
   mounted: function mounted() {
@@ -41264,98 +41294,122 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary my-3",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#exampleModal"
+        }
+      },
+      [_vm._v("Add Task")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("form", [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "name" } }, [
+                      _vm._v("Task Name")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.name,
+                          expression: "name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { name: "name", id: "name", rows: "2" },
+                      domProps: { value: _vm.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.name = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Close")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { type: "submit" },
+                    on: { click: _vm.taskStore }
+                  },
+                  [_vm._v("Create")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
+    return _c("div", { staticClass: "modal-header" }, [
       _c(
-        "button",
-        {
-          staticClass: "btn btn-primary my-3",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#exampleModal"
-          }
-        },
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
         [_vm._v("Add Task")]
       ),
       _vm._v(" "),
       _c(
-        "div",
+        "button",
         {
-          staticClass: "modal fade",
+          staticClass: "close",
           attrs: {
-            id: "exampleModal",
-            tabindex: "-1",
-            role: "dialog",
-            "aria-labelledby": "exampleModalLabel",
-            "aria-hidden": "true"
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
           }
         },
-        [
-          _c(
-            "div",
-            { staticClass: "modal-dialog", attrs: { role: "document" } },
-            [
-              _c("div", { staticClass: "modal-content" }, [
-                _c("div", { staticClass: "modal-header" }, [
-                  _c(
-                    "h5",
-                    {
-                      staticClass: "modal-title",
-                      attrs: { id: "exampleModalLabel" }
-                    },
-                    [_vm._v("Modal title")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "close",
-                      attrs: {
-                        type: "button",
-                        "data-dismiss": "modal",
-                        "aria-label": "Close"
-                      }
-                    },
-                    [
-                      _c("span", { attrs: { "aria-hidden": "true" } }, [
-                        _vm._v("×")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-body" }, [_vm._v("...")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-footer" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-secondary",
-                      attrs: { type: "button", "data-dismiss": "modal" }
-                    },
-                    [_vm._v("Close")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "button" }
-                    },
-                    [_vm._v("Save changes")]
-                  )
-                ])
-              ])
-            ]
-          )
-        ]
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
   }
@@ -41418,7 +41472,7 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
-      _c("add-task"),
+      _c("add-task", { on: { "task-added": _vm.refresh } }),
       _vm._v(" "),
       _c(
         "ul",
@@ -53647,12 +53701,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 });
 var app = new Vue({
   el: '#app',
-  router: router,
-  history: true,
-  hashbang: false,
-  linkActiveClass: 'active'
+  router: router
 });
-router.mode = 'html5';
 
 /***/ }),
 

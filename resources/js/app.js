@@ -34,8 +34,4 @@ const router = new VueRouter({ routes });
 const app = new Vue({
     el: '#app',
     router: router,
-    history: true,
-    hashbang: false,
-    linkActiveClass: 'active'
 });
-router.mode = 'html5'
